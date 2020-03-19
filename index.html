@@ -1,1 +1,30 @@
-Hello World
+<html>
+  <head>
+    <title>Javascript-Android Communication</title>
+  </head>
+	  <body>
+	    <script type="text/javascript">
+	    function showAndroidToast(toast) {
+	    	console.log("showAndroidToast");
+	    	let request = {
+	    		id : "1234",
+	    		bridge_session_token : "ABCDEF",
+	    		body : {
+	    			type: "user_profile.get_info"
+	    		},
+	    		callback : "JSMethodToSendResponse"
+	    	}
+	    	let json = JSON.stringify(request)
+	    	console.log(json);
+	        JSToNativeBridge.callToNative(json);
+	    }
+	    function JSMethodToSendResponse(response){
+	    	let json = JSON.stringify(response)
+	    	console.log(json);
+	    }
+		</script>
+		<form>
+			<input type="button" value="Click me!" onclick="showAndroidToast('Hello Android!')" />
+		</form>
+		</body>
+</html>
